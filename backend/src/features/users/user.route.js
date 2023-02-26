@@ -36,7 +36,21 @@ const getUsers = async () => {
   }
 };
 
-// GET all users API
+// GET all users detail
+
+router.get("/", async (req, res) => {
+  try {
+    const users = await db.collection("users").find().toArray();
+    if (users.length == 0) {
+      return res.status(404).send("No data found");
+    }
+    res.send(users);
+  } catch (error) {
+    res.status(500).send({ message: "Internal server error" });
+  }
+});
+
+// POST all users API
 
 router.post("/", async (req, res) => {
   const data = await getUsers()
