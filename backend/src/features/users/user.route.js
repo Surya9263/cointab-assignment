@@ -47,9 +47,11 @@ router.get("/", async (req, res) => {
 
   try {
     await db.collection("users").drop();
-    const users = await db.collection("users").insertMany(data);
+    await db.collection("users").insertMany(data);
+    const users = await db.collection("users").find().toArray();
+    console.log(users);
 
-    res.send(data);
+    res.send(users);
   } catch (e) {
     console.error(e);
     res.status(500).send({ message: "Internal server error" });
