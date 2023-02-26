@@ -47,8 +47,8 @@ router.get("/", async (req, res) => {
 
   try {
     const prevUsers = await db.collection("users").find().toArray();
-    if (prevUsers) {
-      await db.collection("users")?.drop();
+    if (prevUsers.length != 0) {
+      await db.collection("users").drop();
     }
     await db.collection("users").insertMany(data);
     const users = await db.collection("users").find().toArray();
@@ -63,6 +63,10 @@ router.get("/", async (req, res) => {
 
 router.delete("/", async (req, res) => {
   try {
+    const prevUsers = await db.collection("users").find().toArray();
+    if (prevUsers.length != 0) {
+      await db.collection("users").drop();
+    }
     await db.collection("users")?.drop();
     res.send("Users deleted successfully");
   } catch (error) {
