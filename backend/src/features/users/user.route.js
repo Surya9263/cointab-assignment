@@ -43,14 +43,15 @@ router.get("/", async (req, res) => {
     .then((response) => {
       return response;
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err.message));
 
   try {
-    await db.collection("users").drop();
+    const prevUsers = await db.collection("users").find().toArray();
+    if (prevUsers) {
+      await db.collection("users")?.drop();
+    }
     await db.collection("users").insertMany(data);
     const users = await db.collection("users").find().toArray();
-    console.log(users);
-
     res.send(users);
   } catch (e) {
     console.error(e);
@@ -62,7 +63,7 @@ router.get("/", async (req, res) => {
 
 router.delete("/", async (req, res) => {
   try {
-    await db.collection("users").drop();
+    await db.collection("users")?.drop();
     res.send("Users deleted successfully");
   } catch (error) {
     res.status(500).send({ message: "Internal server error" });
