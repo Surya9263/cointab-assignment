@@ -38,7 +38,7 @@ const getUsers = async () => {
 
 // GET all users API
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   const data = await getUsers()
     .then((response) => {
       return response;
