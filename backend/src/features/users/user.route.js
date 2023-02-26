@@ -64,10 +64,11 @@ router.get("/", async (req, res) => {
 router.delete("/", async (req, res) => {
   try {
     const prevUsers = await db.collection("users").find().toArray();
-    if (prevUsers.length != 0) {
-      await db.collection("users").drop();
+    if (prevUsers.length == 0) {
+      return res.status(404).send("No data found");
     }
-    await db.collection("users")?.drop();
+    await db.collection("users").drop();
+
     res.send("Users deleted successfully");
   } catch (error) {
     res.status(500).send({ message: "Internal server error" });
@@ -84,7 +85,7 @@ router.get("/:id", async (req, res) => {
       .find({ _id: new ObjectId(id) })
       .toArray();
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).send({ message: "User not found" });
     }
     res.send(user);
   } catch (error) {
