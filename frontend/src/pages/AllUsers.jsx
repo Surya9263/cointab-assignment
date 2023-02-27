@@ -30,12 +30,12 @@ const AllUsers = () => {
     );
   }
 
-  
+
   if (users.error) {
     return (
       <Alert status="error">
         <AlertIcon />
-        <AlertTitle>Oops! Something went wrong, kindly refresh</AlertTitle>
+        <AlertTitle>Oops! No users found, kindly fetch again</AlertTitle>
       </Alert>
     );
   }
