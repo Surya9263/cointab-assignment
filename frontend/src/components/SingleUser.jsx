@@ -1,6 +1,5 @@
-import { Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Heading, Image, Stack, Text } from '@chakra-ui/react'
+import { Card, CardBody, Divider, Heading, Image, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
-import {useSelector} from "react-redux"
 
 const SingleUser = (props) => {
     const {name,picture,dob,gender,location}=props.data
