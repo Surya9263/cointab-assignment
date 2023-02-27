@@ -28,7 +28,6 @@ const Home = () => {
   };
 
   const getDetail = () => {
-    
     navigate("/users")
   };
 
@@ -65,7 +64,7 @@ const Home = () => {
         <Button onClick={getDetail}>ALL USERS DETAIL</Button>
       </ButtonGroup>
       <Heading>
-        {users.data && users.data}
+        {users.msg && users.msg}
       </Heading>
     </div>
   )

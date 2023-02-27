@@ -23,6 +23,7 @@ export const getAllUsers = () => async (dispatch) => {
     dispatch({ type: FETCH_USER_ERROR });
   }
 };
+
 export const getAllUsersDetail = () => async (dispatch) => {
   dispatch({ type: GET_USER_DETAILS_LOADING });
   try {

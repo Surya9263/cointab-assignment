@@ -16,6 +16,7 @@ const AllUsers = () => {
 
 
   if (users.loading) {
+    console.log("loading");
     return (
       <Box
         height="100vh"
@@ -32,6 +33,7 @@ const AllUsers = () => {
 
 
   if (users.error) {
+    console.log("error");
     return (
       <Alert status="error">
         <AlertIcon />
@@ -41,7 +43,7 @@ const AllUsers = () => {
   }
   return (
     <SimpleGrid columns={[2, 1, 3]} spacing='40px'>
-      {users?.data?.map((e)=><SingleUser key={e._id} data={e} />)}
+      {users.data.length!==0 &&  users?.data?.map((e)=><SingleUser key={e._id} data={e} />)}
       </SimpleGrid>
   )
 }

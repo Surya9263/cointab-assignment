@@ -14,6 +14,7 @@ const initState = {
   loading: false,
   error: false,
   data: [],
+  msg: "",
 };
 
 export const userReducer = (state = initState, { type, payload }) => {
@@ -45,7 +46,7 @@ export const userReducer = (state = initState, { type, payload }) => {
         ...state,
         loading: false,
         error: false,
-        data: "All users added to the database",
+        msg: "All users added to the database",
       };
 
     case DELETE_USER_SUCCESS:
@@ -53,16 +54,15 @@ export const userReducer = (state = initState, { type, payload }) => {
         ...state,
         loading: false,
         error: false,
-        data: "All users deleted from the database",
+        msg: "All users deleted from the database",
       };
 
     case GET_USER_DETAILS_SUCCESS:
-      console.log("payload",payload);
       return {
         ...state,
         loading: false,
         error: false,
-        data:payload,
+        data: payload,
       };
     default:
       return state;
