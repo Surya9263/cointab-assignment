@@ -21,7 +21,7 @@ async function connect() {
 
 connect();
 
-const { Router, request } = require("express");
+const { Router } = require("express");
 const { default: axios } = require("axios");
 
 const router = Router();
@@ -36,17 +36,28 @@ const getUsers = async () => {
   }
 };
 
-// GET all users detail
+// GET users with pagination
 
 router.get("/", async (req, res) => {
+  const page = Number(req.query.page);
+  const limit = Number(req.query.limit);
+
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
   try {
-    const users = await db.collection("users").find().toArray();
+    const users = await db
+      .collection("users")
+      .find()
+      .limit(limit)
+      .skip(startIndex)
+      .toArray();
     if (users.length == 0) {
       return res.status(404).send("No data found");
     }
-    res.send(users);
+    res.send({ users, totalPages: 10 });
   } catch (error) {
-    res.status(500).send({ message: "Internal server error" });
+    res.status(500).send(error.message);
   }
 });
 
