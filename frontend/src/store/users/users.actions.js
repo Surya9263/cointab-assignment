@@ -14,9 +14,7 @@ import {
 export const getAllUsers = () => async (dispatch) => {
   dispatch({ type: FETCH_USER_LOADING });
   try {
-    const res = await axios.post(
-      "https://cointab-assignment-production-0140.up.railway.app/users"
-    );
+    const res = await axios.post("https://cointab-qcb5.onrender.com/users");
     dispatch({ type: FETCH_USER_SUCCESS });
   } catch (error) {
     console.log(error);
@@ -24,11 +22,11 @@ export const getAllUsers = () => async (dispatch) => {
   }
 };
 
-export const getAllUsersDetail = () => async (dispatch) => {
+export const getAllUsersDetail = (page,limit) => async (dispatch) => {
   dispatch({ type: GET_USER_DETAILS_LOADING });
   try {
     const res = await axios.get(
-      "https://cointab-assignment-production-0140.up.railway.app/users"
+      `https://cointab-qcb5.onrender.com/users?page=${page}&limit=${limit}`
     );
     dispatch({ type: GET_USER_DETAILS_SUCCESS, payload: res.data });
   } catch (error) {
@@ -41,7 +39,7 @@ export const deleteUsers = () => async (dispatch) => {
   dispatch({ type: DELETE_USER_LOADING });
   try {
     const res = await axios.delete(
-      "https://cointab-assignment-production-0140.up.railway.app/users"
+      "https://cointab-qcb5.onrender.com/users"
     );
     dispatch({ type: DELETE_USER_SUCCESS });
   } catch (error) {

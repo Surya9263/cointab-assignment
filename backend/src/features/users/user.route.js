@@ -55,7 +55,7 @@ router.get("/", async (req, res) => {
     if (users.length == 0) {
       return res.status(404).send("No data found");
     }
-    res.send({ users, totalPages: 10 });
+    res.send({ users, totalPages: Math.ceil(100 / limit) });
   } catch (error) {
     res.status(500).send(error.message);
   }

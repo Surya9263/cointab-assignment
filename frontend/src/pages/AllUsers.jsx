@@ -7,11 +7,13 @@ import { getAllUsersDetail } from '../store/users/users.actions';
 
 
 const AllUsers = () => {
+  const [page,setPage]=useState(1)
+
   const dispatch = useDispatch();
   const users = useSelector((store) => store.users);
   console.log(users);
   useEffect(()=>{
-    dispatch(getAllUsersDetail())
+    dispatch(getAllUsersDetail(page,10))
   },[])
 
 
