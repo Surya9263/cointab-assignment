@@ -18,7 +18,6 @@ const AllUsers = () => {
 
 
   if (users.loading) {
-    console.log("loading");
     return (
       <Box
         height="100vh"

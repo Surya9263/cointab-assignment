@@ -22,13 +22,13 @@ export const getAllUsers = () => async (dispatch) => {
   }
 };
 
-export const getAllUsersDetail = (page,limit) => async (dispatch) => {
+export const getAllUsersDetail = (page, limit) => async (dispatch) => {
   dispatch({ type: GET_USER_DETAILS_LOADING });
   try {
     const res = await axios.get(
       `https://cointab-qcb5.onrender.com/users?page=${page}&limit=${limit}`
     );
-    dispatch({ type: GET_USER_DETAILS_SUCCESS, payload: res.data });
+    dispatch({ type: GET_USER_DETAILS_SUCCESS, payload: res.data.users });
   } catch (error) {
     console.log(error);
     dispatch({ type: GET_USER_DETAILS_ERROR });
@@ -38,9 +38,7 @@ export const getAllUsersDetail = (page,limit) => async (dispatch) => {
 export const deleteUsers = () => async (dispatch) => {
   dispatch({ type: DELETE_USER_LOADING });
   try {
-    const res = await axios.delete(
-      "https://cointab-qcb5.onrender.com/users"
-    );
+    const res = await axios.delete("https://cointab-qcb5.onrender.com/users");
     dispatch({ type: DELETE_USER_SUCCESS });
   } catch (error) {
     console.log(error);
