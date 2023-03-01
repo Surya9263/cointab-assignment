@@ -4,6 +4,7 @@ import axios from "axios";
 import SingleUser from '../components/SingleUser';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsersDetail } from '../store/users/users.actions';
+import Pagination from '../components/Pagination';
 
 
 const AllUsers = () => {
@@ -14,7 +15,7 @@ const AllUsers = () => {
   console.log(users);
   useEffect(()=>{
     dispatch(getAllUsersDetail(page,10))
-  },[])
+  },[page])
 
 
   if (users.loading) {
@@ -43,9 +44,12 @@ const AllUsers = () => {
     );
   }
   return (
-    <SimpleGrid columns={[2, 1, 3]} spacing='40px'>
-      {users.data.length!==0 &&  users?.data?.map((e)=><SingleUser key={e._id} data={e} />)}
+    <Box>
+      <SimpleGrid columns={[2, 1, 3]} spacing='40px'>
+      {users.data?.users?.length!==0 &&  users?.data?.users?.map((e)=><SingleUser key={e._id} data={e} />)}
       </SimpleGrid>
+      <Pagination total={users.data && users.data.totalPages} curr={page} onChange={(value)=>setPage(value)} />
+    </Box>
   )
 }
 

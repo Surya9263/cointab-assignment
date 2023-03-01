@@ -2,7 +2,7 @@ import { Card, CardBody, Divider, Heading, Image, Stack, Text } from '@chakra-ui
 import React from 'react'
 
 const SingleUser = (props) => {
-    const {name,picture,dob,gender,location}=props.data
+    const {name,picture,dob,gender,location,email,phone}=props.data
   return (
     <Card width='sm' m={"auto"} mt={10}>
   <CardBody>
@@ -12,16 +12,22 @@ const SingleUser = (props) => {
       borderRadius='lg'
       width={"100%"}
     />
-    <Stack mt='6' spacing='3'>
+    <Stack mt='2' spacing='2'>
       <Heading color='blue.600' size='md'>{name?.title} {name?.first} {name?.last}</Heading>
       <Text fontSize='xl'>
-        Age: {dob?.age}
+        <span color={"blue"}>Age:</span> {dob?.age}
       </Text>
       <Text fontSize='xl'>
         Gender: {gender && gender}
       </Text>
       <Text fontSize='xl'>
         Country: {location?.country}
+      </Text>
+      <Text fontSize='xl'>
+        Email: {email && email}
+      </Text>
+      <Text fontSize='xl'>
+        Phone: {phone && phone}
       </Text>
     </Stack>
   </CardBody>

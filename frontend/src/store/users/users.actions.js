@@ -28,7 +28,7 @@ export const getAllUsersDetail = (page, limit) => async (dispatch) => {
     const res = await axios.get(
       `https://cointab-qcb5.onrender.com/users?page=${page}&limit=${limit}`
     );
-    dispatch({ type: GET_USER_DETAILS_SUCCESS, payload: res.data.users });
+    dispatch({ type: GET_USER_DETAILS_SUCCESS, payload: res.data });
   } catch (error) {
     console.log(error);
     dispatch({ type: GET_USER_DETAILS_ERROR });
