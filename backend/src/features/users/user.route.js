@@ -26,15 +26,15 @@ const { default: axios } = require("axios");
 
 const router = Router();
 
-const getUsers = async () => {
-  try {
-    const res = await axios.get("https://randomuser.me/api/?results=100");
-    const data = res.data.results;
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+// const getUsers = async () => {
+//   try {
+//     const res = await axios.get("https://randomuser.me/api/?results=100");
+//     const data = res.data.results;
+//     return data;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 // GET users with pagination
 
@@ -46,12 +46,22 @@ router.get("/", async (req, res) => {
   const endIndex = page * limit;
 
   try {
-    const users = await db
-      .collection("users")
-      .find()
-      .limit(limit)
-      .skip(startIndex)
-      .toArray();
+    let users;
+    if (req.query.gender) {
+      users = await db
+        .collection("users")
+        .find({ gender:req.query.gender })
+        .limit(limit)
+        .skip(startIndex)
+        .toArray();
+    } else {
+      users = await db
+        .collection("users")
+        .find()
+        .limit(limit)
+        .skip(startIndex)
+        .toArray();
+    }
     if (users.length == 0) {
       return res.status(404).send("No data found");
     }
