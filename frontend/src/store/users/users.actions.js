@@ -22,11 +22,11 @@ export const getAllUsers = () => async (dispatch) => {
   }
 };
 
-export const getAllUsersDetail = (page, limit) => async (dispatch) => {
+export const getAllUsersDetail = (page, limit,gender) => async (dispatch) => {
   dispatch({ type: GET_USER_DETAILS_LOADING });
   try {
     const res = await axios.get(
-      `https://cointab-qcb5.onrender.com/users?page=${page}&limit=${limit}`
+      `https://cointab-qcb5.onrender.com/users?page=${page}&limit=${limit}&gender=${gender}`
     );
     dispatch({ type: GET_USER_DETAILS_SUCCESS, payload: res.data });
   } catch (error) {
